@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/styles.css" media="screen">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Jogo da Dislexia</title>
+</head>
+
+<script>
+
+    function verificaPalavra(palavra){
+        const audioAplausos = new Audio('./audio/aplausos.mp3');
+
+        let listacerta = [
+            'bola', 'som', 'fato', 'tato', 'mes', 'calo',
+            'mala', 'lata', 'vela', 'pata', 'sala', 'cola', 'dado',
+            'mela', 'deus', 'tatu', 'colo', 'cola', 'vala'
+        ]
+
+        let listaerrada = [
+            'dola', 'mos', 'nes', 'bado', 'beus', 'ata', 'tola'
+        ]
+
+        tamListaCerta = listacerta.length;
+        tamListaErrada = listaerrada.length;
+
+        console.log(palavra);
+        
+        for (let i = 0; i < tamListaCerta; i++){
+            if(palavra.id == listacerta[i]){
+                document.getElementById('imagem').style.display = "inherit";
+                audioAplausos.play();
+                palavra.id = '';
+                window.setTimeout( function() {
+                    window.location.reload();
+                }, 4000);
+            }else if(palavra.id == listaerrada[i]){
+                document.getElementById('imagem2').style.display = "inherit";
+                palavra.id = '';
+                window.setTimeout( function() {
+                    window.location.reload();
+                }, 4000);
+            }
+        }
+    }
+
+    function atualizaPagina(){
+        window.location.reload(true);
+    }
+
+</script>
+
+<body>
+    <div class="container">
+        <div class="certoerrado">
+            <img src="./img/certoouerrado.png" width="320" height="205" alt="">
+        </div>
+        <div id="imagem" style="display: none">
+            <img src="./img/0089.gif" alt="">
+        </div>
+        <div id="imagem2" style="display: none">
+            <img src="./img/errou.gif" alt="">
+        </div>
+        
+
+        <div id="teclado">
+            <div class="teclas">
+                <button id="bola" onclick="verificaPalavra(this)">bola</button>
+                <button id="dola" onclick="verificaPalavra(this)">dola</button>
+                <button id="tola" onclick="verificaPalavra(this)">tola</button>
+                <button id="som" onclick="verificaPalavra(this)">som</button>
+                <button id="fato" onclick="verificaPalavra(this)">fato</button>
+                <button id="tato" onclick="verificaPalavra(this)">tato</button>
+                <button id="mos" onclick="verificaPalavra(this)">mos</button>
+                <button id="nes" onclick="verificaPalavra(this)">nês</button>
+                <button id="mes" onclick="verificaPalavra(this)">mês</button>
+            </div>
+            <div class="teclas">
+                <button id="calo" onclick="verificaPalavra(this)">calo</button>
+                <button id="mala" onclick="verificaPalavra(this)">mala</button>
+                <button id="lata" onclick="verificaPalavra(this)">lata</button>
+                <button id="vela" onclick="verificaPalavra(this)">vela</button>
+                <button id="pata" onclick="verificaPalavra(this)">pata</button>
+                <button id="sala" onclick="verificaPalavra(this)">sala</button>
+                <button id="cola" onclick="verificaPalavra(this)">cola</button>
+                <button id="dado" onclick="verificaPalavra(this)">dado</button>
+                <button id="bado" onclick="verificaPalavra(this)">bado</button>
+            </div>
+            <div class="teclas">
+                <button id="mela" onclick="verificaPalavra(this)">mela</button>
+                <button id="ata" onclick="verificaPalavra(this)">ata</button>
+                <button id="deus" onclick="verificaPalavra(this)">deus</button>
+                <button id="beus" onclick="verificaPalavra(this)">beus</button>
+                <button id="tatu" onclick="verificaPalavra(this)">tatu</button>
+                <button id="colo" onclick="verificaPalavra(this)">colo</button>
+                <button id="cola" onclick="verificaPalavra(this)">cola</button>
+                <button id="vala" onclick="verificaPalavra(this)">vala</button>
+                <button id="btnReiniciar"onclick="atualizaPagina()">🎮</button>
+            </div>
+        </div>
+
+
+
+        <!-- inicio modal Bootstrap-->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body" id="modalBody"></div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!-- fim modal Bootstrap--> 
+
+    </div>
+    
+    <div id="status">@Tiago Matias</div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
